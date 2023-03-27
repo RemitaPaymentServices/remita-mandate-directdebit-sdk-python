@@ -5,8 +5,8 @@ from datetime import datetime
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
@@ -18,15 +18,19 @@ merchantId = "27768931"
 mandateId = "280007807262"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
 requestId = "1582194580"
-hash = sha512(mandateId + merchantId + requestId + apiKey)
+hash = hash512(mandateId + merchantId + requestId + apiKey)
 
 History_payload = {
-      "merchantId":f"{merchantId}",
-      "mandateId":f"{mandateId}",
-      "hash":f"{hash}",
-      "requestId":f"{requestId}"
+      "merchantId": f"{merchantId}",
+      "mandateId": f"{mandateId}",
+      "hash": f"{hash}",
+      "requestId": f"{requestId}"
 }
 
-# Post the payload to Demo Link
-Setup_Post = requests.post(url, json=History_payload)
-print(Setup_Post.text)
+# Post Function
+def checkhistory(url, History_payload):
+	history_post = requests.post(url, json=History_payload)
+	return history_post.text
+
+
+print(checkhistory(url, History_payload))

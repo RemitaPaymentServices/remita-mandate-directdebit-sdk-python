@@ -4,8 +4,8 @@ import hashlib
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
@@ -18,7 +18,7 @@ mandateId = "200007681305"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
 transactionRef = "7681307"
 requestId = "1524034885236"
-hash = sha512(transactionRef + merchantId + requestId + apiKey)
+hash = hash512(transactionRef + merchantId + requestId + apiKey)
 
 Cancel_payload = {
       "merchantId": f"{merchantId}",
@@ -28,6 +28,10 @@ Cancel_payload = {
       "hash": f"{hash}"
 }
 
-# Post the payload to Demo Link
-Setup_Post = requests.post(url, json=Cancel_payload)
-print(Setup_Post.text)
+# Post Function
+def cancelpayment(url, Cancel_payload):
+	cancel_post = requests.post(url, json=Cancel_payload)
+	return cancel_post.text
+
+
+print(cancelpayment(url, Cancel_payload))

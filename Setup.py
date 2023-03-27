@@ -8,40 +8,57 @@ url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
 
-# Define Variables
+# Credentials
+requestId = str(datetime.now())
 merchantId = "27768931"
 serviceTypeId = "35126630"
-amount = "50000"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
-requestId = str(datetime.now())
+
+
+# Define Variables
+mandatetype = "DD"
+amount = "50000"
+maxNoOfDebits = "3"
+startDate = "5/12/2023"
+enddate = "30/2/2024"
+payerAccount = "1234890002"
+payerEmail = "segunakomolafe7@gmail.com"
+payerName = "ADEYEMI JAMES"
+payerPhone = "2345089765647"
+payerBankCode = "057"
 
 # Get the Hash Value
-hash = sha512(merchantId + serviceTypeId + requestId + amount + apiKey)
+hash = hash512(merchantId + serviceTypeId + requestId + amount + apiKey)
 
-# Define the Payload to Post to the URL
+# The Payload to Post to the URL
 setup_payload = {
     "amount": f"{amount}",
-	"endDate": "30/2/2024",
-	"hash": f"{hash}",
-	"mandateType": "DD",
-	"maxNoOfDebits": "3",
-	"merchantId": "27768931",
-	"payerAccount": "1234890002",
-	"payerBankCode": "057",
-	"payerEmail": "segunakomolafe7@gmail.com",
-	"payerName": "ADEYEMI JAMES",
-	"payerPhone": "2345089765647",
+    "startDate": f"{startDate}",
+	"endDate": f"{enddate}",
+    "hash": f"{hash}",
+	"mandateType": f"{mandatetype}",
+	"maxNoOfDebits": f"{maxNoOfDebits}",
+	"payerAccount": f"{payerAccount}",
+	"payerBankCode": f"{payerBankCode}",
+	"payerEmail": f"{payerEmail}",
+	"payerName": f"{payerName}",
+	"payerPhone": f"{payerPhone}",
+    "merchantId": f"{merchantId}",
 	"requestId": f"{requestId}",
-	"serviceTypeId": "35126630",
-	"startDate": "5/12/2023"
+	"serviceTypeId": f"{serviceTypeId}",
 }
 
-# Post the payload to Demo Link
-Setup_Post = requests.post(url, json=setup_payload)
-print(Setup_Post.text)
+
+# Post Function
+def mandatesetup(url, setup_payload):
+	Setup_Post = requests.post(url, json=setup_payload)
+	return Setup_Post.text
+
+
+print(mandatesetup(url, setup_payload))

@@ -8,8 +8,8 @@ url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
@@ -20,8 +20,9 @@ mandateId = "280007806861"
 requestId = datetime.now().strftime("%H%M%S%f")
 amount = "500"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
-
-hash = sha512(merchantId + serviceTypeId + requestId + amount + apiKey)
+fundingAccount = "3072119052"
+fundingBankCode = "057"
+hash = hash512(merchantId + serviceTypeId + requestId + amount + apiKey)
 
 Pay_payload = {
       "merchantId": f"{merchantId}",
@@ -30,10 +31,15 @@ Pay_payload = {
       "requestId": f"{requestId}",
       "totalAmount": f"{amount}",
       "mandateId": f"{mandateId}",
-      "fundingAccount": "3072119052",
-      "fundingBankCode": "057"
+      "fundingAccount": f"{fundingAccount}",
+      "fundingBankCode": f"{fundingBankCode}"
 }
 
-# Post the payload to Demo Link
-Setup_Post = requests.post(url, json=Pay_payload)
-print(Setup_Post.text)
+
+# Post Function
+def sendpayment(url, Pay_payload):
+	sendpayment_post = requests.post(url, json=Pay_payload)
+	return sendpayment_post.text
+
+
+print(sendpayment(url, Pay_payload))

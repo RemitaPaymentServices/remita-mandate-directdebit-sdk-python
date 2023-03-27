@@ -8,8 +8,8 @@ url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
@@ -19,7 +19,7 @@ apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
 apiToken = "SGlQekNzMEdMbjhlRUZsUzJCWk5saDB6SU14Zk15djR4WmkxaUpDTll6bGIxRCs4UkVvaGhnPT0="
 requestId = datetime.now().strftime("%H%M%S%f")
 requestTS = datetime.now().strftime("%y-%m-%dT%H:%M:%S:%f")
-apiHash = sha512(apiKey + requestId + apiToken)
+apiHash = hash512(apiKey + requestId + apiToken)
 
 otp = "1234"
 card = "0441234567890"
@@ -49,6 +49,10 @@ headers = {
           }
 
 
-# Post the payload to Demo Link
-otp_Post = requests.post(url, headers=headers, json=otp_payload)
-print(otp_Post.text)
+# Post Function
+def validateotp(url, headers, otp_payload):
+	validateotp_post = requests.post(url, headers=headers, json=otp_payload)
+	return validateotp_post.text
+
+
+print(validateotp(url, headers, otp_payload))

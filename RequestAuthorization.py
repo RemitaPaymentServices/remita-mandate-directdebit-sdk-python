@@ -8,34 +8,39 @@ url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
 
-otp_payload = {
-   "mandateId": "220008231534",
-   "requestId": "1626109625683"
-}
-
+mandateId = "220008231534"
+requestID = "1626109625683"
 merchantId = "27768931"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
 apiToken = "SGlQekNzMEdMbjhlRUZsUzJCWk5saDB6SU14Zk15djR4WmkxaUpDTll6bGIxRCs4UkVvaGhnPT0="
 requestId = datetime.now().strftime("%H%M%S%f")
 requestTS = datetime.now().strftime("%y-%m-%dT%H:%M:%S:%f")
-apiHash = sha512(apiKey + requestId + apiToken)
+apiHash = hash512(apiKey + requestId + apiToken)
 
+otp_payload = {
+   "mandateId": f"{mandateId}",
+   "requestId": f"{requestID}"
+}
 
 headers = {
-    "MERCHANT_ID": "27768931",
-    "API_KEY": "Q1dHREVNTzEyMzR8Q1dHREVNTw==",
+    "MERCHANT_ID": f"{merchantId}",
+    "API_KEY": f"{apiKey}",
     "REQUEST_ID": f"{requestId}",
     "REQUEST_TS": f"{requestTS}",
     "API_DETAILS_HASH": f"{apiHash}"
           }
 
 
-# Post the payload to Demo Link
-otp_Post = requests.post(url, headers=headers, json=otp_payload)
-print(otp_Post.text)
+# Post Function
+def requestotp(url, headers, otp_payload):
+	otp_post = requests.post(url, headers=headers, json=otp_payload)
+	return otp_post.text
+
+
+print(requestotp(url, headers, otp_payload))

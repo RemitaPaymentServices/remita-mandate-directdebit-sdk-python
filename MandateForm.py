@@ -4,8 +4,8 @@ import hashlib
 
 
 # Hash Function
-def sha512(input):
-    hashed_input = hashlib.sha512(input.encode('utf-8'))
+def hash512(credentials):
+    hashed_input = hashlib.sha512(credentials.encode('utf-8'))
     hex_dig = hashed_input.hexdigest()
     return hex_dig
 
@@ -14,7 +14,7 @@ merchantId = "27768931"
 mandateId = "210007800813"
 requestId = "payer1"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
-hash = sha512(merchantId + apiKey + requestId)
+hash = hash512(merchantId + apiKey + requestId)
 
 # Demo Link
 url = "https://remitademo.net/remita/ecomm/mandate/form/"f"{merchantId}""/"f"{hash}""/"f"{mandateId}""/"f"\
@@ -23,3 +23,11 @@ url = "https://remitademo.net/remita/ecomm/mandate/form/"f"{merchantId}""/"f"{ha
 # Get Request
 Get_Form = requests.get(url)
 print(Get_Form.text)
+
+# Post Function
+def get_form(url):
+	form_get = requests.post(url)
+	return form_get.text
+
+
+print(get_form(url))
