@@ -4,7 +4,8 @@ import hashlib
 from datetime import datetime
 
 # Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/validateAuthorization"
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/validateAuthorization"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/validateAuthorization"
 
 
 # Hash Function
@@ -55,4 +56,4 @@ def validateotp(url, headers, otp_payload):
 	return validateotp_post.text
 
 
-print(validateotp(url, headers, otp_payload))
+print(validateotp(demo_url, headers, otp_payload))

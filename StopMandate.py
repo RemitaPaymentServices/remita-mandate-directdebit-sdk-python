@@ -10,8 +10,10 @@ def hash512(credentials):
     return hex_dig
 
 
-# Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/stop"
+# URLs
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/stop"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/stop"
+
 
 mandateId = "150007761106"
 merchantId = "27768931"
@@ -33,4 +35,4 @@ def stopmandate(url,  Stop_payload):
 	return stopmandate_post.text
 
 
-print(stopmandate(url, Stop_payload))
+print(stopmandate(demo_url, Stop_payload))

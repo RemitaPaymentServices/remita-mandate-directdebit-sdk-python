@@ -11,8 +11,10 @@ def hash512(credentials):
     return hex_dig
 
 
-# Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/history"
+# URLs
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/history"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/history"
+
 
 merchantId = "27768931"
 mandateId = "280007807262"
@@ -27,10 +29,11 @@ History_payload = {
       "requestId": f"{requestId}"
 }
 
+
 # Post Function
 def checkhistory(url, History_payload):
 	history_post = requests.post(url, json=History_payload)
 	return history_post.text
 
 
-print(checkhistory(url, History_payload))
+print(checkhistory(demo_url, History_payload))

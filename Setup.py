@@ -3,8 +3,9 @@ import requests
 import hashlib
 from datetime import datetime
 
-# Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/setup"
+# URLs
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/setup"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/setup"
 
 
 # Hash Function
@@ -61,4 +62,4 @@ def mandatesetup(url, setup_payload):
 	return Setup_Post.text
 
 
-print(mandatesetup(url, setup_payload))
+print(mandatesetup(demo_url, setup_payload))

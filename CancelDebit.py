@@ -10,8 +10,9 @@ def hash512(credentials):
     return hex_dig
 
 
-# Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/stop"
+# URLs
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/stop"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/payment/stop"
 
 merchantId = "27768931"
 mandateId = "200007681305"
@@ -28,10 +29,11 @@ Cancel_payload = {
       "hash": f"{hash}"
 }
 
+
 # Post Function
 def cancelpayment(url, Cancel_payload):
 	cancel_post = requests.post(url, json=Cancel_payload)
 	return cancel_post.text
 
 
-print(cancelpayment(url, Cancel_payload))
+print(cancelpayment(demo_url, Cancel_payload))

@@ -16,18 +16,18 @@ requestId = "payer1"
 apiKey = "Q1dHREVNTzEyMzR8Q1dHREVNTw=="
 hash = hash512(merchantId + apiKey + requestId)
 
-# Demo Link
-url = "https://remitademo.net/remita/ecomm/mandate/form/"f"{merchantId}""/"f"{hash}""/"f"{mandateId}""/"f"\
+
+# URLs
+demo_url = "https://remitademo.net/remita/ecomm/mandate/form/"f"{merchantId}""/"f"{hash}""/"f"{mandateId}""/"f"\
+{requestId}""/rest.reg"
+live_url = "https://login.remita.net/remita/ecomm/mandate/form/"f"{merchantId}""/"f"{hash}""/"f"{mandateId}""/"f"\
 {requestId}""/rest.reg"
 
-# Get Request
-Get_Form = requests.get(url)
-print(Get_Form.text)
 
 # Post Function
 def get_form(url):
-	form_get = requests.post(url)
+	form_get = requests.get(url)
 	return form_get.text
 
 
-print(get_form(url))
+print(get_form(demo_url))

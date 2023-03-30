@@ -3,8 +3,9 @@ import requests
 import hashlib
 from datetime import datetime
 
-# Demo Link
-url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/requestAuthorization"
+# URLs
+demo_url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/requestAuthorization"
+live_url = "https://login.remita.net/remita/exapp/api/v1/send/api/echannelsvc/echannel/mandate/requestAuthorization"
 
 
 # Hash Function
@@ -43,4 +44,4 @@ def requestotp(url, headers, otp_payload):
 	return otp_post.text
 
 
-print(requestotp(url, headers, otp_payload))
+print(requestotp(demo_url, headers, otp_payload))
