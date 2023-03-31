@@ -3,7 +3,7 @@ Clone Project and run.
 <p><b> Live Environment:</b> Replace test credentials and variables with your credentials and values.
 
 ## Documentation
-https://github.com/RemitaNet/remita-mandate-directdebit-sdk-php/blob/main/doc/Direct_Debit_Integration_Documentation_v2.0.pdf
+[See Documentation Here](https://github.com/RemitaNet/remita-mandate-directdebit-sdk-php/blob/main/doc/Direct_Debit_Integration_Documentation_v2.0.pdf)
 
 
 ## Useful Links
