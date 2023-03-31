@@ -1,5 +1,5 @@
 # Remita Mandate Direct Debit SDK in Python
-Clone Project and run each of the modules. 
+Clone Project and run. 
 <p><b> Live Environment:</b> Replace test credentials and variables with your credentials and values.
 
 ## Documentation
